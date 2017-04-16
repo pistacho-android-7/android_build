@@ -1103,7 +1103,7 @@ ifneq ($(strip $(TARGET_BOOTLOADER_CONFIG)),)
 ifeq ($(TARGET_ARCH),arm64)
 BOOTLOADER_CROSS_TOOLCHAIN := `pwd`/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 else
-BOOTLOADER_CROSS_TOOLCHAIN := `pwd`/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+BOOTLOADER_CROSS_TOOLCHAIN := `pwd`/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
 endif
 BOOTLOADER_ENV := ARCH=arm CROSS_COMPILE=$(BOOTLOADER_CROSS_TOOLCHAIN)
 HOST_PROCESSOR := $(shell cat /proc/cpuinfo | grep processor | wc -l)
@@ -1137,11 +1137,11 @@ ifeq ($(TARGET_ARCH),arm64)
 KERNEL_CROSS_TOOLCHAIN := `pwd`/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 KERNEL_IMAGE_NAME    := kernel_imx/arch/$(TARGET_ARCH)/boot/Image
 else
-KERNEL_CROSS_TOOLCHAIN := `pwd`/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+KERNEL_CROSS_TOOLCHAIN := `pwd`/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
 KERNEL_IMAGE_NAME    := kernel_imx/arch/$(TARGET_ARCH)/boot/zImage
 endif
 KERNEL_CFLAGS := KCFLAGS=-mno-android
-KERNEL_ENV := ARCH=$(TARGET_ARCH) CROSS_COMPILE=$(KERNEL_CROSS_TOOLCHAIN) LOADADDR=$(LOAD_KERNEL_ENTRY) $(KERNEL_CFLAGS)
+KERNEL_ENV := ARCH=$(TARGET_ARCH) CROSS_COMPILE=$(KERNEL_CROSS_TOOLCHAIN) LOADADDR=$(LOAD_KERNEL_ENTRY)
 HOST_PROCESSOR := $(shell cat /proc/cpuinfo | grep processor | wc -l)
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 TARGET_PREBUILT_KERNEL := $(PRODUCT_OUT)/kernel
